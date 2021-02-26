@@ -1,0 +1,38 @@
+{
+  "name": "otter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build-ts": "tsc",
+    "build-docker": "docker build -t otter .",
+    "build": "npm run build-ts && npm run lint && npm run build-docker",
+    "server": "docker run -d --env-file .env otter",
+    "lint": "eslint ./src/**/*.ts --fix",
+    "watch-ts": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyoshiKayo/Otter.git"
+  },
+  "author": "kayo@kayo.moe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RyoshiKayo/Otter/issues"
+  },
+  "homepage": "https://github.com/RyoshiKayo/Otter#readme",
+  "devDependencies": {
+    "@types/node": "10.17.27",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.2.0",
+    "ts-node": "^9.0.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0"
+  }
+}
