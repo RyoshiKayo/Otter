@@ -5,13 +5,12 @@
     "noImplicitAny": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "outDir": "dist",
-    "rootDir": "src"
+    "outDir": "lib",
+    "rootDir": "src",
+    "declaration": true,
+    "importHelpers": true,
+    "composite": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules/*"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/*"]
 }

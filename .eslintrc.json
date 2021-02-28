@@ -4,21 +4,15 @@
     "es6": true,
     "node": true
   },
-  "extends": [
-    "prettier"
-  ],
-  "plugins": [
-    "prettier"
-  ],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
+  "extends": ["prettier"],
+  "plugins": ["prettier"],
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2017,
     "sourceType": "module"
   },
+  "parser": "babel-eslint",
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-warning-comments": "off"
   }
 }
