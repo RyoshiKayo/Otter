@@ -1,4 +1,4 @@
-FROM mhart/alpine-node
+FROM public.ecr.aws/bitnami/node:latest
 
 WORKDIR /srv
 ADD ./src/ ./src/
