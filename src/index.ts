@@ -1,17 +1,14 @@
 import { config } from 'dotenv';
 config();
-import * as Commando from 'discord.js-commando';
+import { ShardingManager } from 'discord.js';
 
-let PREFIX: string = process.env.DISCORD_BOT_PREFIX;
-
-const client = new Commando.Client({
-  owner: process.env.DISCORD_BOT_OWNER,
-  commandPrefix: PREFIX,
-  commandEditableDuration: 60,
+const manager = new ShardingManager('./lib/bot.js', {
+  token: process.env.DISCORD_BOT_TOKEN,
+  totalShards: 1,
+  mode: 'process',
+  shardList: [1],
 });
 
-client.registry
-  .registerGroups([['otters', 'Commands for Otters']])
-  .registerDefaults();
+manager.on('shardCreate', (shard) => console.log(`Launched shard ${shard.id}`));
 
-client.login(process.env.DISCORD_BOT_TOKEN);
+manager.spawn();
