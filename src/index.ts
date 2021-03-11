@@ -7,7 +7,7 @@ const manager = new ShardingManager('./lib/bot.js', {
   token: process.env.DISCORD_BOT_TOKEN,
   totalShards: 1,
   mode: 'process',
-  shardList: [1],
+  shardList: [0],
 });
 
 manager.on('shardCreate', (shard) => console.log(`Launched shard ${shard.id}`));
