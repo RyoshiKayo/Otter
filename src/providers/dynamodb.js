@@ -69,7 +69,7 @@ class DynamoDBProvider extends SettingProvider {
   }
 
   async init(client) {
-    this.validateAWSConfig();
+    // this.validateAWSConfig();
     this.client = client;
 
     // Load all settings
