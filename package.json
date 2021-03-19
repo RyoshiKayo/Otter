@@ -7,8 +7,8 @@
     "ddb-prov-hack": "mkdir -p ./lib/providers; cp ./src/providers/dynamodb.js ./lib/providers/dynamodb.js",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "lint": "eslint ./src/**/*.ts",
-    "build": "npm run lint && tsc",
-    "start": "npm run build && npm run ddb-prov-hack && node lib/index",
+    "build": "npm run lint && tsc && npm run ddb-prov-hack",
+    "start": "npm run build && node lib/index",
     "docker-build": "npm run build && docker build -t otter .",
     "docker-start": "npm run docker-build && docker run -d --env-file .env otter"
   },
