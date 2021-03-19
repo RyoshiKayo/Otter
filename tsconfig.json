@@ -9,8 +9,13 @@
     "rootDir": "src",
     "declaration": true,
     "importHelpers": true,
-    "composite": true
+    "composite": true,
+    "esModuleInterop": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules/*"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules/*"
+  ]
 }
