@@ -31,3 +31,21 @@ if (
     .listen(PORT);
   log.info(`Launched HTTP server on port: ${PORT}`);
 }
+
+// Get task ARN
+http
+  .get('${ECS_CONTAINER_METADATA_URI_V4}/task', (res) => {
+    let data = '';
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    res.on('end', () => {
+      console.log(data);
+
+      const taskInfo = JSON.parse(data);
+      process.env.ECS_TASK_ARN =
+        taskInfo['Labels']['com.amazonaws.ecs.task-arn'];
+    });
+  })
+  .on('error', (err) => log.error(`Failed to get ECS task info: ${err}`));

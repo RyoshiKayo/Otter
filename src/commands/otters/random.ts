@@ -1,6 +1,7 @@
 import { Message } from 'discord.js';
 import { Command } from 'discord.js-commando';
 import type { CommandoClient, CommandoMessage } from 'discord.js-commando';
+import { AWSExecutionTimeMetricAsync } from '../../decorators/AWSExecutionTimeMetric';
 
 export default class random extends Command {
   constructor(client: CommandoClient) {
@@ -12,6 +13,12 @@ export default class random extends Command {
     });
   }
 
+  @AWSExecutionTimeMetricAsync('Otter/Commando', {
+    Service: 'OtterBotService',
+    Operation: 'otter:random',
+    Host: process.env.HOST,
+    Task: process.env.ECS_TASK_ARN,
+  })
   run(msg: CommandoMessage): Promise<Message | Message[] | null> | null {
     return msg.channel.send(`Not implemented`);
   }
