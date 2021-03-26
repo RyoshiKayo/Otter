@@ -11,6 +11,8 @@ const PREFIX: string = process.env.DISCORD_BOT_PREFIX;
 const BOT_OWNER: string = process.env.DISCORD_BOT_OWNER;
 const BOT_TOKEN: string = process.env.DISCORD_BOT_TOKEN;
 
+const readyTimerStart = new Date();
+
 const client = new Commando.Client({
   owner: BOT_OWNER,
   commandPrefix: PREFIX,
@@ -52,7 +54,8 @@ client.on(
       _args = args;
     }
 
-    console.log(typeof args);
+    if (command.name === 'help') return;
+
     log.info(`Ran ${command.name} with args: ${_args}`, {
       commandResults: await res,
       fromPattern: fromPattern,
@@ -65,23 +68,11 @@ client.registry
   .registerDefaults()
   .registerCommandsIn(path.join(__dirname, 'commands'));
 
-// This doesn't work cause client.login returns a Promise, need to figure that out.
-// function metricify<T>(fn: (...args: any[]) => T): (...args: any[]) => T {
-//   return function (...args: any[]) {
-//     const startTime = new Date();
-//     let result: any;
-//     try {
-//       result = fn(...args);
-//     } finally {
-//       console.log(Math.abs(new Date().getTime() - startTime.getTime()));
-//     }
-//     return result;
-//   };
-// }
-
-// const loginWithMetrics = metricify(client.login);
-// loginWithMetrics(BOT_TOKEN);
-
 client.login(BOT_TOKEN);
 
-client.on('ready', () => log.info(`Ready!`));
+client.on('ready', () => {
+  const readyTimeDelta = Math.abs(
+    new Date().getMilliseconds() - readyTimerStart.getMilliseconds()
+  );
+  log.info(`Ready! (${readyTimeDelta}ms)`, { time: readyTimeDelta });
+});
