@@ -34,7 +34,7 @@ if (
 
 // Get task ARN
 http
-  .get('${ECS_CONTAINER_METADATA_URI_V4}/task', (res) => {
+  .get(`${process.env.ECS_CONTAINER_METADATA_URI_V4}/task`, (res) => {
     let data = '';
     res.on('data', (chunk) => {
       data += chunk;
