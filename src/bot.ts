@@ -19,14 +19,21 @@ const client = new Commando.Client({
   commandEditableDuration: 60,
 });
 
+let aws_creds;
+if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+  aws_creds = {
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
+  };
+}
+
 client.setProvider(
   new DynamoDBProvider(
     new AWS.DynamoDB.DocumentClient({
       region: process.env.AWS_DEFAULT_REGION,
-      credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      },
+      ...aws_creds,
     }),
     process.env.GUILD_SETTINGS_TABLE_NAME
   )

@@ -54,22 +54,7 @@ class DynamoDBProvider extends SettingProvider {
     this.listeners = new Map();
   }
 
-  async validateAWSConfig() {
-    const requiredEnvVars = [
-      'AWS_DEFAULT_REGION',
-      'AWS_ACCESS_KEY_ID',
-      'AWS_SECRET_ACCESS_KEY',
-    ];
-
-    requiredEnvVars.forEach((envVar) => {
-      if (!process.env[envVar] || process.env[envVar] === '') {
-        throw new Error(`${envVar} must be set!`);
-      }
-    });
-  }
-
   async init(client) {
-    // this.validateAWSConfig();
     this.client = client;
 
     // Load all settings
@@ -88,7 +73,6 @@ class DynamoDBProvider extends SettingProvider {
         `DynamoDBProvider Unable to run intial scan: ${error}`
       );
     }
-    console.log(JSON.stringify(scanRes));
 
     for (const item of scanRes.Items) {
       let settings = item.settings;
