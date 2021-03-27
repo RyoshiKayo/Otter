@@ -35,7 +35,7 @@ client.setProvider(
       region: process.env.AWS_DEFAULT_REGION,
       ...aws_creds,
     }),
-    process.env.GUILD_SETTINGS_TABLE_NAME
+    process.env.DISCORD_BOT_GUILD_SETTINGS_TABLE_NAME
   )
 );
 

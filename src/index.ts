@@ -33,19 +33,21 @@ if (
 }
 
 // Get task ARN
-http
-  .get(`${process.env.ECS_CONTAINER_METADATA_URI_V4}/task`, (res) => {
-    let data = '';
-    res.on('data', (chunk) => {
-      data += chunk;
-    });
+if (process.env.ECS_CONTAINER_METADATA_URI_V4) {
+  http
+    .get(`${process.env.ECS_CONTAINER_METADATA_URI_V4}/task`, (res) => {
+      let data = '';
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
 
-    res.on('end', () => {
-      console.log(data);
+      res.on('end', () => {
+        console.log(data);
 
-      const taskInfo = JSON.parse(data);
-      process.env.ECS_TASK_ARN =
-        taskInfo['Labels']['com.amazonaws.ecs.task-arn'];
-    });
-  })
-  .on('error', (err) => log.error(`Failed to get ECS task info: ${err}`));
+        const taskInfo = JSON.parse(data);
+        process.env.ECS_TASK_ARN =
+          taskInfo['Labels']['com.amazonaws.ecs.task-arn'];
+      });
+    })
+    .on('error', (err) => log.error(`Failed to get ECS task info: ${err}`));
+}
