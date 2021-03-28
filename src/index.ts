@@ -45,8 +45,7 @@ if (process.env.ECS_CONTAINER_METADATA_URI_V4) {
         console.log(data);
 
         const taskInfo = JSON.parse(data);
-        process.env.ECS_TASK_ARN =
-          taskInfo['Labels']['com.amazonaws.ecs.task-arn'];
+        process.env.ECS_TASK_ARN = taskInfo.TaskARN;
       });
     })
     .on('error', (err) => log.error(`Failed to get ECS task info: ${err}`));
