@@ -14,10 +14,8 @@ export default class random extends Command {
   }
 
   @AWSExecutionTimeMetricAsync('Otter/Commando', {
-    Service: 'OtterBotService',
-    Operation: 'otter:random',
-    Host: process.env.HOST,
-    Task: process.env.ECS_TASK_ARN,
+    Operation: 'command:otter:random',
+    Task: process.env.ECS_TASK_ARN || 'NotATask',
   })
   run(msg: CommandoMessage): Promise<Message | Message[] | null> | null {
     return msg.channel.send(`Not implemented`);

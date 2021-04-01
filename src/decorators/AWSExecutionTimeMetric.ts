@@ -1,4 +1,5 @@
 import { metricScope, Unit } from 'aws-embedded-metrics';
+import os from 'os';
 
 type Dimensions = Record<string, string>;
 type Property = Record<string, string | Record<string, string>>;
@@ -40,14 +41,6 @@ export function AWSExecutionTimeMetric(
   };
 }
 
-/**
- * Async version of AWSExecutionTimeMetric
- * @param metricName Overwrite the name of the metric. Defaults to "className:funcName"
- * @param dimensions
- * @param properties
- * @param unit
- * @returns
- */
 export function AWSExecutionTimeMetricAsync(
   nameSpace?: string,
   dimensions?: Dimensions,
@@ -77,7 +70,10 @@ export function AWSExecutionTimeMetricAsync(
           const tDelta = Math.abs(t0.valueOf() - t1.valueOf());
 
           metrics.setNamespace(nameSpace);
-          metrics.putDimensions(dimensions);
+          metrics.putDimensions({
+            ...dimensions,
+            host: os.hostname(),
+          });
           metrics.putMetric(`ExecutionTime`, tDelta, unit);
         }
       });
