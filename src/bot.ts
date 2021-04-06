@@ -77,11 +77,14 @@ client.registry
 
 client.login(BOT_TOKEN);
 
-client.on('shardReady', () => {
+client.on('shardReady', (shardId) => {
   const readyTimeDelta = Math.abs(
     new Date().getMilliseconds() - readyTimerStart.getMilliseconds()
   );
-  log.info(`Ready! (${readyTimeDelta}ms)`, { time: readyTimeDelta });
+  log.info(`Shard ${shardId} Ready! (${readyTimeDelta}ms)`, {
+    time: readyTimeDelta,
+    shardId,
+  });
 });
 
 client.on('error' || 'shardError', (error, shardId) => {
