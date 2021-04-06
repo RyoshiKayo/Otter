@@ -83,3 +83,14 @@ client.on('ready', () => {
   );
   log.info(`Ready! (${readyTimeDelta}ms)`, { time: readyTimeDelta });
 });
+
+client.on('error' || 'shardError', (error, shardId) => {
+  log.error(`[Discord.js Client] Got an error!`, { error, shardId });
+});
+
+client.on('disconnect' || 'shardDisconnect', (closeEvent, shardId) => {
+  log.info(`[Discord.js Client] Shard ${shardId} disconnected!`, {
+    closeEvent,
+    shardId,
+  });
+});

@@ -53,7 +53,6 @@ metricScope((metrics) => async () => {
   if (process.env.ECS_CONTAINER_METADATA_URI_V4) {
     http
       .get(`${process.env.ECS_CONTAINER_METADATA_URI_V4}/task`, (res) => {
-        console.log('foo');
         let data = '';
         res.on('data', (chunk) => {
           data += chunk;
