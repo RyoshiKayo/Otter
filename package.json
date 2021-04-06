@@ -8,7 +8,7 @@
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "lint": "eslint ./src/**/*.ts",
     "prestart": "npm run lint && tsc && npm run ddb-prov-hack",
-    "prestart:docker": "npm run build && docker build -t otter .",
+    "prestart:docker": "npm run prestart && docker build -t otter .",
     "start": "node lib/index",
     "start:docker": "npm run docker-build && docker run -d --env-file .env otter"
   },
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/RyoshiKayo/Otter#readme",
   "devDependencies": {
-    "@types/dynamodb-lock-client": "../DefinitelyTyped/types/dynamodb-lock-client",
+    "@types/dynamodb-lock-client": "^0.7.0",
     "@types/node": "10.17.27",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.20.0",
