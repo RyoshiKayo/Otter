@@ -77,7 +77,7 @@ client.registry
 
 client.login(BOT_TOKEN);
 
-client.on('ready', () => {
+client.on('shardReady', () => {
   const readyTimeDelta = Math.abs(
     new Date().getMilliseconds() - readyTimerStart.getMilliseconds()
   );

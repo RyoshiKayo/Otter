@@ -8,4 +8,6 @@ RUN npm install
 RUN tsc
 RUN mkdir -p ./lib/providers; cp ./src/providers/dynamodb.js ./lib/providers/dynamodb.js
 
+EXPOSE 80
+
 CMD ["node", "."]

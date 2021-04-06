@@ -10,7 +10,7 @@
     "prestart": "npm run lint && tsc && npm run ddb-prov-hack",
     "prestart:docker": "npm run prestart && docker build -t otter .",
     "start": "node lib/index",
-    "start:docker": "npm run docker-build && docker run -d --env-file .env otter"
+    "start:docker": "docker run -d --env-file .env otter"
   },
   "repository": {
     "type": "git",

@@ -4,10 +4,10 @@ import { ShardingManager } from 'discord.js';
 import * as http from 'http';
 import { log } from './logging';
 import { acquireShards } from './providers/shardLockProvider';
-import { metricScope, Unit } from 'aws-embedded-metrics';
+// import { metricScope, Unit } from 'aws-embedded-metrics';
 
-metricScope((metrics) => async () => {
-  metrics.setNamespace('Otter/Commando');
+(async () => {
+  // metrics.setNamespace('Otter/Commando');
 
   let shardList: number[];
   try {
@@ -29,7 +29,7 @@ metricScope((metrics) => async () => {
 
   manager.on('shardCreate', (shard) => {
     log.info(`Launched shard ${shard.id}`, { shard: shard.id });
-    metrics.putMetric('shardCount', 1, Unit.Count);
+    // metrics.putMetric('shardCount', 1, Unit.Count);
   });
 
   manager.spawn();
